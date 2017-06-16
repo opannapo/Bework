@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBase">#FF4081</color>
+    <color name="whiteBase">#FFFFFF</color>
+    <color name="yellowBase">#f9f232</color>
+    <color name="greenBase">#3bb79b</color>
+    <color name="blackBase">#CC000000</color>
+    <color name="blackDark">#000000</color>
+    <color name="greenBaseTrans">#553bb79b</color>
+    <color name="redBase">#a60201</color>
+    <color name="redBaseDark">#a03261</color>
+    <color name="textBase">#77000000</color>
+    <color name="greyBase">#404040</color>
+    <color name="greySoft">#e1e1e1</color>
+    <color name="toolbar">#252525</color>
+    <color name="greyDark">#202020</color>
+    <color name="greyVeryDark">#191919</color>
+    <color name="toolbarColor">#77ffffff</color>
+    <color name="menuColor">#77FFFFFF</color>
+    <color name="greenDark">#1e5c4e</color>
+    <color name="greenVeryDark">#143e34</color>
+</resources>
