@@ -5,18 +5,18 @@ Small Android Framework
 # Gradle
 1. Top-level.<br /> 
 buildscript {<br />
-    repositories {<br />
-        jcenter()<br />
-    }<br />
-    dependencies {<br />
-        classpath 'com.android.tools.build:gradle:2.1.2'<br />
-    }<br />
+    _repositories {<br />
+        _jcenter()<br />
+    _}<br />
+    _dependencies {<br />
+        _classpath 'com.android.tools.build:gradle:2.1.2'<br />
+    _}<br />
 }<br />
 <br />
 allprojects {<br />
-    repositories {<br />
-        jcenter()<br />
-        maven { url 'https://jitpack.io'}<br />
+    _repositories {<br />
+        _jcenter()<br />
+        _maven { url 'https://jitpack.io'}<br />
     }<br />
 }<br />
 ...
