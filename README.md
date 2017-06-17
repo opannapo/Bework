@@ -12,6 +12,7 @@
 - Inject View
 - Inject Font-Style
 - Base Parcelable
+- Etc...
  
 ### Dependencies used by Berok
 | Name | Type |
