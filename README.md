@@ -61,7 +61,7 @@ dependencies {
 ...
 ```
 
-### Application Class
+### 2. Application Class
 Create Application Class,
 then extend Bework BaseApp class.
 ```java
@@ -151,7 +151,7 @@ public class APP extends BaseApp {
 }
 ```
 
-### 2. Manifest
+### 3. Manifest
 ```xml
 ...
 <application
@@ -162,7 +162,7 @@ public class APP extends BaseApp {
         ...
 ```
 
-### 3. Activity
+### 4. Activity
 Create Activity Class,
 then extend Bework BaseActivity class.
 
@@ -215,7 +215,7 @@ public class HomeActivity extends BaseActivity implements HomeView.ViewImpl, Vie
 ```
  
  
-### 4. View
+### 5. View
 Create Class,
 then extend Bework BaseViewModel class.
 
@@ -250,7 +250,7 @@ public class HomeView extends BaseViewModel {
 }
 ```
  
-### 5. Home
+### 6. ActivityControl / Worker
 Create Class,
 then extend Bework BaseActivityControl class.
 
