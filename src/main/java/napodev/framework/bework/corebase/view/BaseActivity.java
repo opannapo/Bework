@@ -79,6 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
 
     @Override
     public void onBackPressed() {
+        Log.d("");
         if (getWorker() != null) {
             onBack();
         } else {
@@ -120,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
     public void redirect(Class destination, Bundle bundle, ANIM_TYPE anim, boolean isKill, boolean isTopLevelActivity) {
         Intent i = new Intent(this, destination);
 
-        if (bundle != null) i.putExtras(bundle);
+        if (bundle != null) i.putExtra(C.BundleKeys.BUNDLE_EXTRA_NAME, bundle);
 
         startActivity(i);
 
@@ -237,10 +238,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         ((TextView) v.findViewById(R.id.tMsg)).setText(text);
     }
 
+    public void showToast(String text, int layId, int textViewId) {
+        View v = getLayoutInflater().inflate(layId, mainView, false);
+        Toast t = new Toast(this);
+        t.setView(v);
+        t.show();
+        ((TextView) v.findViewById(textViewId)).setText(text);
+    }
+
     public void showDialogLoading(String text) {
         dialogLoading.show();
         dialogLoading.setContentView(R.layout.inflate_dialog_loading);
         ((TextView) dialogLoading.findViewById(R.id.tMsg)).setText(text);
+    }
+
+    public void showDialogLoading(String text, int layId, int textViewId, boolean cancelable) {
+        dialogLoading.show();
+        dialogLoading.setCancelable(cancelable);
+        dialogLoading.setContentView(layId);
+        ((TextView) dialogLoading.findViewById(textViewId)).setText(text);
     }
 
     public void dismissDialogLoading() {
@@ -252,6 +268,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
     }
 
     public void restart(Class activity) {
+        BaseApp.getInstance().subActivityName = activity.getSimpleName();
         Intent intent = new Intent(this, activity);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -272,6 +289,5 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
 
     protected void onBack() {
     }
-
 }
 

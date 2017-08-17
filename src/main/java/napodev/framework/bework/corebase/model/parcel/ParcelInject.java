@@ -3,6 +3,7 @@ package napodev.framework.bework.corebase.model.parcel;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,7 +73,13 @@ public class ParcelInject {
                             }
                             break;
                         case JSONARRAY:
-                            dest.writeString(String.valueOf(f.get(source)));
+                            //dest.writeString(String.valueOf(f.get(source)));
+                            if (f.get(source) == null) {
+                                dest.writeByte((byte) (0x00));
+                            } else {
+                                dest.writeByte((byte) (0x01));
+                                dest.writeString(f.get(source).toString());
+                            }
                             break;
                         case PARCELABLE:
                             dest.writeParcelable((Parcelable) f.get(source), flag);
@@ -140,7 +147,16 @@ public class ParcelInject {
                             }
                             break;
                         case JSONARRAY:
-                            f.set(source, in.readString());
+                            //f.set(source, in.readString());
+                            try {
+                                if (in.readByte() == 0x00) {
+                                    f.set(source, null);
+                                } else {
+                                    f.set(source, new JSONArray(in.readString()));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case PARCELABLE:
                             f.set(source, in.readParcelable(source.getClass().getClassLoader()));

@@ -49,6 +49,7 @@ public abstract class BaseScrollingListener extends RecyclerView.OnScrollListene
         Log.d("SCROLLING items firstVisibleItemIndex " + firstVisibleItemIndex);
 
 
+        //coba vertical
         if (dy < 0) {
             Log.d("SCROLLING UP");
             onScrollingUp(recyclerView, dx, dy);
@@ -67,6 +68,21 @@ public abstract class BaseScrollingListener extends RecyclerView.OnScrollListene
                 }
             }
         }
+
+        //coba horizontal
+        if (dx > 0) {
+            Log.d("SCROLLING RIGHT");
+            onScrollingRight(recyclerView, dx, dy);
+            if (visibleItemCount + firstVisibleItemIndex == totalItemCount) {
+                if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
+                    onLastVisible(recyclerView, dx, dy);
+                }
+            }
+        } else if (dx < 0) {
+            Log.d("SCROLLING LEFT");
+            onScrollingLeft(recyclerView, dx, dy);
+        }
+
         storeLastDetectedValues(visibleItemCount, totalItemCount, firstVisibleItemIndex);
     }
 
@@ -94,15 +110,26 @@ public abstract class BaseScrollingListener extends RecyclerView.OnScrollListene
     }
 
 
-    public abstract void onStateStop();
+    public void onStateStop() {
+    }
 
-    public abstract void onStateKeyDown();
+    public void onStateKeyDown() {
+    }
 
-    public abstract void onStateKeyUp();
+    public void onStateKeyUp() {
+    }
 
-    public abstract void onScrollingUp(RecyclerView recyclerView, int dx, int dy);
+    public void onScrollingUp(RecyclerView recyclerView, int dx, int dy) {
+    }
 
-    public abstract void onScrollingDown(RecyclerView recyclerView, int dx, int dy);
+    public void onScrollingDown(RecyclerView recyclerView, int dx, int dy) {
+    }
+
+    public void onScrollingRight(RecyclerView recyclerView, int dx, int dy) {
+    }
+
+    public void onScrollingLeft(RecyclerView recyclerView, int dx, int dy) {
+    }
 
     public abstract void onLastVisible(RecyclerView recyclerView, int dx, int dy);
 

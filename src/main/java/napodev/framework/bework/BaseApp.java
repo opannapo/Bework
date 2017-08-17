@@ -123,20 +123,6 @@ public abstract class BaseApp extends Application implements Application.Activit
                 //.blockClass(SPreference.class)
                 //.blockClass(StringHelper.class)
                 .setWithDetailCaller(configLogCaller());
-
-        /*API.getConfig()
-                .addEnvironment("prod", "http://localhost:8818/", false)
-                .addEnvironment("dev", "https://tab.xarana.com", true)
-                .addEnvironment("prod2", "http://localhost:8820/", false)
-                .addEnvironment("dev2", "http://localhost:8821/", false)
-                .setBearerAuthorization("Bearer " + Session.getToken())
-                .setAccept("application/json")
-                .setContentTypeGet("application/x-www-form-urlencoded")
-                .setContentTypeRaw("application/json")
-                .setContentTypeUrlEncoded("application/x-www-form-urlencoded")
-                .build();
-        Log.d(API.getConfig().getBaseUrl());
-        Log.d(API.getConfig().getBaseEnvironmentName());*/
     }
 
     public Context getAppContext() {

@@ -15,6 +15,7 @@ public final class C {
         public static final String BROADCAST_DEALS_NEED_UPDATE = "BROADCAST_DEALS_NEED_UPDATE ";
         public static final String USER_NEED_UPDATE = "USER_NEED_UPDATE";
         public static final String USER_UPDATED = "USER_UPDATED";
+
     }
 
     public static final class BundleKeys {

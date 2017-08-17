@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import napodev.framework.bework.utils.Log;
-
 /**
  * Created by opannapo on 12/17/16.
  */
@@ -46,10 +44,10 @@ public class StringHelper {
         if (type == FORMAT_TYPE.PRICE) {
             DecimalFormat myFormatter = new DecimalFormat(type.toString());
             output = myFormatter.format(val);
-            Log.d(val + " : " + output);
+            //Log.d(val + " : " + output);
         }
 
-        Log.d(output);
+        //Log.d(output);
         return output;
     }
 
@@ -60,7 +58,7 @@ public class StringHelper {
             output = format.format(val);
         }
 
-        Log.d(output);
+        //Log.d(output);
         return output;
     }
 

@@ -66,7 +66,7 @@ public class SPreference {
         return result;
     }
 
-    public void removeConfig(@NonNull String key) {
+    public static void removeConfig(@NonNull String key) {
         SharedPreferences.Editor editor = config.getPreferences().edit();
         try {
             editor.remove(key);
@@ -74,6 +74,16 @@ public class SPreference {
         }
         editor.commit();
     }
+
+    public static void resetAll() {
+        SharedPreferences.Editor editor = config.getPreferences().edit();
+        try {
+            editor.clear();
+        } catch (Exception e) {
+        }
+        editor.commit();
+    }
+
 
     public static Config getConfig() {
         if (config == null) {

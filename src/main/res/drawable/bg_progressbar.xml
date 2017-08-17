@@ -14,11 +14,10 @@
             android:height="76dip" />
         <gradient
             android:angle="0"
-            android:centerColor="@color/yellowBase"
-            android:endColor="@color/greenBase"
-            android:startColor="@color/redBase"
-            android:type="sweep"
-            android:useLevel="false" />
+            android:centerColor="#f70774"
+            android:endColor="#d300ff"
+            android:startColor="#ffa000"
+            android:type="linear" />
     </shape>
 
 </rotate> 

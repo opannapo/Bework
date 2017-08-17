@@ -15,7 +15,18 @@ public class PermissionHellper {
 
     public enum PERMISSION {
         CALL_PHONE(1, Manifest.permission.CALL_PHONE),
-        READ_EXTERNAL_STORAGE(2, Manifest.permission.READ_EXTERNAL_STORAGE);
+        READ_EXTERNAL_STORAGE(2, Manifest.permission.READ_EXTERNAL_STORAGE),
+        WRITE_EXTERNAL_STORAGE(3, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+        ACCESS_NETWORK_STATE(4, Manifest.permission.ACCESS_NETWORK_STATE),
+        GET_ACCOUNTS(5, Manifest.permission.GET_ACCOUNTS),
+        READ_PHONE_STATE(6, Manifest.permission.READ_PHONE_STATE),
+        RECEIVE_BOOT_COMPLETED(7, Manifest.permission.RECEIVE_BOOT_COMPLETED),
+        ACCESS_WIFI_STATE(8, Manifest.permission.ACCESS_WIFI_STATE),
+        CAMERA(9, Manifest.permission.CAMERA),
+        ACCESS_FINE_LOCATION(10, Manifest.permission.ACCESS_FINE_LOCATION),
+        ACCESS_COARSE_LOCATION(11, Manifest.permission.ACCESS_COARSE_LOCATION),
+        WAKE_LOCK(12, Manifest.permission.WAKE_LOCK),
+        RECEIVE_SMS(13, Manifest.permission.RECEIVE_SMS);
 
         private final int code;
         private final String name;
@@ -45,7 +56,6 @@ public class PermissionHellper {
     public static void request(Activity activity, PERMISSION permission) {
         ActivityCompat.requestPermissions(activity, new String[]{permission.getName()}, permission.getCode());
     }
-
 
     public interface Callback {
         void onResult(boolean isGranted);
