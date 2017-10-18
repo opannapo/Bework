@@ -12,17 +12,25 @@ public final class Log {
         if (config == null)
             return;
 
-        config.setStackTraceElements(Thread.currentThread().getStackTrace());
+        config.TAG_ADDITION = "";
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        config.setStackTraceElements(stackTraceElements);
 
-        if (config.getBlockedClasses().contains(config.getStackTraceElements()[4].getFileName().replace(".java", "")))
-            return;
+        if (stackTraceElements.length >= 5) {
+            String filename = stackTraceElements[4].getFileName();
+            if (filename == null) {
+                return;
+            }
 
-        if (config.isWithDetailCaller) {
-            config.TAG_ADDITION = config.getStackTraceElements()[4].getFileName() + "->" +
-                    config.getStackTraceElements()[4].getMethodName() +
-                    (config.isWithDetailLine ? " line:" + config.getStackTraceElements()[4].getLineNumber() + " -> " : " ");
-        } else {
-            config.TAG_ADDITION = "";
+            if (config.getBlockedClasses().contains(filename.replace(".java", ""))) {
+                return;
+            }
+
+            if (config.isWithDetailCaller) {
+                config.TAG_ADDITION = filename + "->" +
+                    stackTraceElements[4].getMethodName() +
+                    (config.isWithDetailLine ? " line:" + stackTraceElements[4].getLineNumber() + " -> " : " ");
+            }
         }
     }
 
