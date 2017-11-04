@@ -44,11 +44,17 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void onResume() {
         super.onResume();
         if (isAdded()) {
-            ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
-            params.width = layoutSize()[0];
-            params.height = layoutSize()[1];
-            getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
-            getDialog().getWindow().setBackgroundDrawable(layoutColorDrawable());
+            try {
+                ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
+                params.width = layoutSize()[0];
+                params.height = layoutSize()[1];
+                getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+                getDialog().getWindow().setBackgroundDrawable(layoutColorDrawable());
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -66,13 +72,13 @@ public abstract class BaseDialogFragment extends DialogFragment {
         return clickListener;
     }
 
-    public BaseDialogFragment setSupportFragmentManager(FragmentManager fragmentManager) {
-        this.fragmentManager = fragmentManager;
+    public BaseDialogFragment setClickListener(DialogClickListener clickListener) {
+        this.clickListener = clickListener;
         return this;
     }
 
-    public BaseDialogFragment setClickListener(DialogClickListener clickListener) {
-        this.clickListener = clickListener;
+    public BaseDialogFragment setSupportFragmentManager(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
         return this;
     }
 

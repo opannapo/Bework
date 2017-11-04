@@ -28,8 +28,8 @@ public final class Log {
 
             if (config.isWithDetailCaller) {
                 config.TAG_ADDITION = filename + "->" +
-                    stackTraceElements[4].getMethodName() +
-                    (config.isWithDetailLine ? " line:" + stackTraceElements[4].getLineNumber() + " -> " : " ");
+                        stackTraceElements[4].getMethodName() +
+                        (config.isWithDetailLine ? " line:" + stackTraceElements[4].getLineNumber() + " -> " : " ");
             }
         }
     }

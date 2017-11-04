@@ -1,4 +1,4 @@
-package napodev.framework.bework.utils.helper;
+package napodev.framework.bework.utils.helper.permissions;
 
 import android.Manifest;
 import android.app.Activity;
@@ -55,6 +55,18 @@ public class PermissionHellper {
 
     public static void request(Activity activity, PERMISSION permission) {
         ActivityCompat.requestPermissions(activity, new String[]{permission.getName()}, permission.getCode());
+    }
+
+    public static void check(Context context, PermissionEntity permissionEntity, Callback callback) {
+        if (ActivityCompat.checkSelfPermission(context, permissionEntity.getName()) == PERMISSION_GRANTED) {
+            callback.onResult(true);
+        } else {
+            callback.onResult(false);
+        }
+    }
+
+    public static void request(Activity activity, PermissionEntity permissionEntity) {
+        ActivityCompat.requestPermissions(activity, new String[]{permissionEntity.getName()}, permissionEntity.getRequestCode());
     }
 
     public interface Callback {

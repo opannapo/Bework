@@ -1,12 +1,9 @@
 package napodev.framework.bework.corebase.view;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +18,7 @@ import napodev.framework.bework.BaseApp;
 import napodev.framework.bework.R;
 import napodev.framework.bework.utils.C;
 import napodev.framework.bework.utils.Log;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by opannapo on 3/21/17.
@@ -29,7 +27,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
     final String TAG = "BaseActivity";
     public BaseApp baseApp;
     public ViewGroup mainView;
-    private Dialog dialogLoading;
     private String suClassNameTag;
 
     public enum ANIM_TYPE {
@@ -48,8 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         super.onCreate(savedInstanceState);
 
         baseApp = BaseApp.getInstance();
-        dialogLoading = new Dialog(this);
-        dialogLoading.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         LocalBroadcastManager.getInstance(this).registerReceiver(localBroadcastReceiver,
                 new IntentFilter(C.Broadcast.BROADCAST_FILTER_NAME));
@@ -73,18 +68,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
 
     @Override
     protected void onDestroy() {
-        unregisterBroadcast();
         super.onDestroy();
+        unregisterBroadcast();
     }
 
     @Override
     public void onBackPressed() {
         Log.d("");
-        if (getWorker() != null) {
-            onBack();
-        } else {
-            showToast("No initial Worker", false);
-        }
+        onBack();
     }
 
     private BroadcastReceiver localBroadcastReceiver = new BroadcastReceiver() {
@@ -246,27 +237,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         ((TextView) v.findViewById(textViewId)).setText(text);
     }
 
-    public void showDialogLoading(String text) {
-        dialogLoading.show();
-        dialogLoading.setContentView(R.layout.inflate_dialog_loading);
-        ((TextView) dialogLoading.findViewById(R.id.tMsg)).setText(text);
-    }
-
-    public void showDialogLoading(String text, int layId, int textViewId, boolean cancelable) {
-        dialogLoading.show();
-        dialogLoading.setCancelable(cancelable);
-        dialogLoading.setContentView(layId);
-        ((TextView) dialogLoading.findViewById(textViewId)).setText(text);
-    }
-
-    public void dismissDialogLoading() {
-        if (dialogLoading != null) {
-            if (dialogLoading.isShowing()) {
-                dialogLoading.dismiss();
-            }
-        }
-    }
-
     public void restart(Class activity) {
         BaseApp.getInstance().subActivityName = activity.getSimpleName();
         Intent intent = new Intent(this, activity);
@@ -288,6 +258,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
     }
 
     protected void onBack() {
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }
 

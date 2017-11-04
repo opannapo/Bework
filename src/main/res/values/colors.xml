@@ -18,8 +18,10 @@
     <color name="toolbar">#252525</color>
     <color name="greyDark">#202020</color>
     <color name="greyVeryDark">#191919</color>
+    <color name="light_grey">#bbbbbb</color>
     <color name="toolbarColor">#77ffffff</color>
     <color name="menuColor">#77FFFFFF</color>
     <color name="greenDark">#1e5c4e</color>
     <color name="greenVeryDark">#143e34</color>
+    <color name="dark_grey">#b0b0b0</color>
 </resources>

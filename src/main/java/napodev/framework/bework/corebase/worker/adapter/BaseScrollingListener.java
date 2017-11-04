@@ -25,7 +25,7 @@ public abstract class BaseScrollingListener extends RecyclerView.OnScrollListene
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
-        Log.d("SCROLLING STATE " + (newState == 0 ? "STOP" : (newState == 1 ? "keyDown" : "keyUp")));
+        Log.d("SCROLLING STATE " + (newState == 0 ? " STOP " : (newState == 1 ? " keyDown " : " keyUp ")));
         scrollState = newState;
         if (newState == 0) {
             onStateStop();
@@ -50,21 +50,40 @@ public abstract class BaseScrollingListener extends RecyclerView.OnScrollListene
 
 
         //coba vertical
-        if (dy < 0) {
-            Log.d("SCROLLING UP");
-            onScrollingUp(recyclerView, dx, dy);
-
-            if (firstVisibleItemIndex == 0) {
-                if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
-                    onTopVisible(recyclerView, dx, dy);
+        if (!linearLayoutManager.getReverseLayout()) {
+            if (dy < 0) {
+                Log.d("SCROLLING UP");
+                onScrollingUp(recyclerView, dx, dy);
+                if (firstVisibleItemIndex == 0) {
+                    if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
+                        onTopVisible(recyclerView, dx, dy);
+                    }
+                }
+            } else if (dy > 0) {
+                Log.d("SCROLLING DOWN");
+                onScrollingDown(recyclerView, dx, dy);
+                if (visibleItemCount + firstVisibleItemIndex == totalItemCount) {
+                    if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
+                        onLastVisible(recyclerView, dx, dy);
+                    }
                 }
             }
-        } else if (dy > 0) {
-            Log.d("SCROLLING DOWN");
-            onScrollingDown(recyclerView, dx, dy);
-            if (visibleItemCount + firstVisibleItemIndex == totalItemCount) {
-                if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
-                    onLastVisible(recyclerView, dx, dy);
+        } else {
+            if (dy < 0) {
+                Log.d("SCROLLING UP");
+                onScrollingUp(recyclerView, dx, dy);
+                if (visibleItemCount + firstVisibleItemIndex == totalItemCount) {
+                    if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
+                        onLastVisible(recyclerView, dx, dy);
+                    }
+                }
+            } else if (dy > 0) {
+                Log.d("SCROLLING DOWN");
+                onScrollingDown(recyclerView, dx, dy);
+                if (firstVisibleItemIndex == 0) {
+                    if (!checkLastDetectedValuesIsSame(visibleItemCount, totalItemCount, firstVisibleItemIndex)) {
+                        onTopVisible(recyclerView, dx, dy);
+                    }
                 }
             }
         }

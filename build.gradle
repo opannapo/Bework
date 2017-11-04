@@ -1,14 +1,15 @@
+
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.0"
     }
     buildTypes {
         release {
@@ -24,5 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.+'
     compile 'com.android.support:recyclerview-v7:25.+'
     compile files('libs/jose4j-0.4.3.jar')
+    // Font
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
 

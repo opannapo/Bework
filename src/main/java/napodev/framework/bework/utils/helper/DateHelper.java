@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import napodev.framework.bework.utils.Log;
+
 /**
  * Created by opannapo on 11/1/15.
  */
@@ -107,6 +109,7 @@ public final class DateHelper {
 
     public static class TimeMillis {
         public static String asDateString(long timestamp, FORMAT format) {
+            Log.d("timestamp " + timestamp + " :: Format " + format.toString());
             try {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(timestamp);

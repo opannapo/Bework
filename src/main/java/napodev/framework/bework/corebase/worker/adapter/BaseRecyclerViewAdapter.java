@@ -16,31 +16,14 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     private final String TAG = "BaseRecyclerViewAdapter";
     public Context context;
-    private ArrayList<Object> dataModels;
     public boolean isHeaderAvailable;
     public boolean isFooterAvailable;
     public BaseViewHolder header;
     public BaseViewHolder footer;
     public Object headerObject;
     public Object footerObject;
+    private ArrayList<Object> dataModels;
     private OnAdapterItemsClickListener clickListener;
-
-    public enum ACTION_TYPE {
-        ADD, REPLACE, DELETE
-    }
-
-    public enum VIEW_TYPE {
-        HEADER(0), FOOTER(1000);
-        final int value;
-
-        VIEW_TYPE(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
 
     public BaseRecyclerViewAdapter(Context context, ArrayList<Object> dataModels, Object headerObject, Object footerObject) {
         this.context = context;
@@ -65,6 +48,14 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         }
 
         return count;
+    }
+
+    public int getDataContentCount() {
+        return dataModels.size();
+    }
+
+    public ArrayList<Object> getDataContent() {
+        return this.dataModels;
     }
 
     @Override
@@ -129,12 +120,12 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         return dataModels.get(position);
     }
 
-    public void setOnItemClickListener(OnAdapterItemsClickListener listener) {
-        this.clickListener = listener;
-    }
-
     public OnAdapterItemsClickListener getOnItemClickListener() {
         return clickListener;
+    }
+
+    public void setOnItemClickListener(OnAdapterItemsClickListener listener) {
+        this.clickListener = listener;
     }
 
     public void notifyHeader(Object object) {
@@ -152,6 +143,22 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     }
 
     public void updateDefaultContentByIndex(int index, Object object, ACTION_TYPE action_type) {
+    }
 
+    public enum ACTION_TYPE {
+        ADD, REPLACE, DELETE
+    }
+
+    public enum VIEW_TYPE {
+        HEADER(0), FOOTER(1000);
+        final int value;
+
+        VIEW_TYPE(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

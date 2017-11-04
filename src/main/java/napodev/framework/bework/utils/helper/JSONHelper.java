@@ -54,6 +54,20 @@ public class JSONHelper {
         return result;
     }
 
+    public static long getLong(JSONObject o, String key) {
+        long result = 0;
+        if (!o.has(key)) {
+            return result;
+        }
+        if (!o.isNull(key)) {
+            try {
+                result = o.getLong(key);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 
     public static boolean getBool(JSONObject o, String key) {
         boolean result = false;

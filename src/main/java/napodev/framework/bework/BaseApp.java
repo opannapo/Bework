@@ -13,6 +13,7 @@ import napodev.framework.bework.utils.Log;
 import napodev.framework.bework.utils.helper.ScreenHelper;
 import napodev.framework.bework.utils.helper.StringHelper;
 import napodev.framework.bework.utils.local.SPreference;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by opannapo on 4/23/17.
@@ -123,6 +124,12 @@ public abstract class BaseApp extends Application implements Application.Activit
                 //.blockClass(SPreference.class)
                 //.blockClass(StringHelper.class)
                 .setWithDetailCaller(configLogCaller());
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Poppins-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
     }
 
     public Context getAppContext() {
@@ -223,4 +230,9 @@ public abstract class BaseApp extends Application implements Application.Activit
     protected abstract boolean configLogCaller();
 
     protected abstract String configLogTag();
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+    }
 }

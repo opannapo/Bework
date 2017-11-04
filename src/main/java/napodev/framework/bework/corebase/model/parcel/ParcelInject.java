@@ -8,8 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
-
-import napodev.framework.bework.utils.Log;
+import java.util.List;
 
 /**
  * Created by opannapo on 4/28/17.
@@ -27,17 +26,19 @@ public class ParcelInject {
     public static final int JSONARRAY = 10;
     public static final int PARCELABLE = 11;
     public static final int BOOLEAN = 12;
+    public static final int ARRAYLIST = 13;
 
     public static void write(Object source, Parcel dest, int flag) {
         String TAG = source.getClass().getSimpleName();
-        Log.d(TAG + " ParcelInject-write");
+        //Log.d(TAG + " ParcelInject-write");
 
         Field[] field = source.getClass().getDeclaredFields();
         for (int i = 0; i < field.length; i++) {
             Field f = field[i];
+            f.setAccessible(true);
             if (f.isAnnotationPresent(Entity.class)) {
                 int anoValue = f.getAnnotation(Entity.class).value();
-                Log.d(TAG + " isAnnotationPresent Entity " + f.getName() + " type " + f.getType() + " " + anoValue);
+                //Log.d(TAG + " isAnnotationPresent Entity " + f.getName() + " type " + f.getType() + " " + anoValue);
                 try {
                     switch (anoValue) {
                         case INT:
@@ -73,7 +74,6 @@ public class ParcelInject {
                             }
                             break;
                         case JSONARRAY:
-                            //dest.writeString(String.valueOf(f.get(source)));
                             if (f.get(source) == null) {
                                 dest.writeByte((byte) (0x00));
                             } else {
@@ -87,19 +87,22 @@ public class ParcelInject {
                         case BOOLEAN:
                             dest.writeByte((byte) (((boolean) f.get(source)) ? 0x01 : 0x00));
                             break;
+                        case ARRAYLIST:
+                            dest.writeList((List) f.get(source));
+                            break;
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             } else {
-                Log.d(TAG + "NOT Entity " + f.getName());
+                //Log.d(TAG + " NOT Entity " + f.getName());
             }
         }
     }
 
     public static void read(Object source, Parcel in) {
         String TAG = source.getClass().getSimpleName();
-        Log.d(TAG + " ParcelInject-read");
+        //Log.d(TAG + " ParcelInject-read");
 
         Field[] field = source.getClass().getDeclaredFields();
         for (int i = 0; i < field.length; i++) {
@@ -107,9 +110,8 @@ public class ParcelInject {
             f.setAccessible(true);
             if (f.isAnnotationPresent(Entity.class)) {
                 int anoValue = f.getAnnotation(Entity.class).value();
-                Log.d(TAG + " isAnnotationPresent Entity " + f.getName() + " type " + f.getType() + " " + anoValue);
+                //Log.d(TAG + " isAnnotationPresent Entity " + f.getName() + " type " + f.getType() + " " + anoValue);
                 try {
-                    //f.set(source, in.readInt());
                     switch (anoValue) {
                         case INT:
                             f.set(source, in.readInt());
@@ -147,7 +149,6 @@ public class ParcelInject {
                             }
                             break;
                         case JSONARRAY:
-                            //f.set(source, in.readString());
                             try {
                                 if (in.readByte() == 0x00) {
                                     f.set(source, null);
@@ -164,12 +165,15 @@ public class ParcelInject {
                         case BOOLEAN:
                             f.set(source, in.readByte() != 0x00);
                             break;
+                        case ARRAYLIST:
+                            f.set(source, in.readArrayList(source.getClass().getClassLoader()));
+                            break;
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             } else {
-                Log.d(TAG + "NOT Entity " + f.getName());
+                //Log.d(TAG + " NOT Entity " + f.getName());
             }
         }
     }
