@@ -57,7 +57,7 @@ allprojects {
 ```gradle
 ...
 dependencies {
-    compile 'com.github.opannapo:Bework:Beta-1.0'
+    compile 'com.github.opannapo:Bework:1.0'
 } 
 ...
 ```
